@@ -24,6 +24,7 @@ public class Taller8V2 {
         String nombrecliente;
         String nombreproducto;
         String tipocliente;
+        String cadena1 = "";
         double porcentaje1 = 1;
         double porcentaje2 = 5;
         double porcentaje3 = 10;
@@ -40,8 +41,9 @@ public class Taller8V2 {
         double precioproducto = 0;
         int cedula = 0;
         double sumatotal = 0;
+        String cadena2 = " ";
 
-        do {            
+        do {
             System.out.println("Ingrese  nombre");
             nombrecliente = entrada.nextLine();
             System.out.println("Ingrese tipo de cliente");
@@ -67,64 +69,56 @@ public class Taller8V2 {
                 precioproducto = 900;
             }
             subtotal = (cantidad * precioproducto);
-            System.out.printf("Venta 1\n"
-                    + "Nombre del cliente:%s\n"
-                    + "Cédula del cliente:%d\n"
-                    + "Tipo de producto:%s\n"
-                    + "Cantidad: %d\n"
-                    + "Precio unitario: %.2f\n"
-                    + "Subtotal: %.2f\n",
-                    nombrecliente,
-                    cedula, nombreproducto, cantidad, precioproducto, subtotal);
 
             descuento1 = (subtotal * porcentaje1) / 100;
             descuento2 = (subtotal * porcentaje2) / 100;
             descuento3 = (subtotal * porcentaje3) / 100;
             descuento4 = (subtotal * porcentaje4) / 100;
-            System.out.println("Ingrese (-1) si ya no va a ordenar nada mas, caso contrario pulse cualquier letra");
+            if (subtotal < 0 && cantidad < 0) {
+                System.out.println("Valor fuera de rango");
+            } else {
+                if (tipocliente.equals("tipo1")) {
+                    costofinal = subtotal - descuento1;
+
+                } else {
+                    if (tipocliente.equals("tipo2")) {
+                        costofinal = subtotal - descuento2;
+
+                    } else {
+                        if (tipocliente.equals("tipo3")) {
+                            costofinal = subtotal - descuento3;
+
+                        } else {
+                        }
+                        if (tipocliente.equals("tipo4")) {
+                            costofinal = subtotal - descuento4;
+
+                        }
+                    }
+                }
+            }
+            sumatotal = sumatotal + costofinal;
+            cadena1 = String.format("%s\nVenta \n"
+                    + "Nombre del cliente:%s\n"
+                    + "Cédula del cliente:%d\n"
+                    + "Tipo de producto:%s\n"
+                    + "Cantidad: %d\n"
+                    + "Precio unitario: %.2f\n"
+                    + "Subtotal: %.2f\n"
+                    + "Precio final: %.2f\n",
+                    cadena1,
+                    nombrecliente,
+                    cedula, nombreproducto, cantidad,
+                    precioproducto, subtotal, costofinal);
+            System.out.println("Ingrese (-1) si ya no va a ordenar nada mas, caso contrario pulse cualquier numero");
             salida = entrada.nextInt();
             if (salida == -1) {
                 bandera = false;
             }
             entrada.nextLine();
+
+            System.out.println(cadena1);
         } while (bandera);
-
-        if (subtotal < 0 && cantidad < 0) {
-            System.out.println("Valor fuera de rango");
-        } else {
-            if (tipocliente.equals("tipo1")) {
-                costofinal = subtotal - descuento1;
-
-            } else {
-                if (tipocliente.equals("tipo2")) {
-                    costofinal = subtotal - descuento2;
-
-                } else {
-                    if (tipocliente.equals("tipo3")) {
-                        costofinal = subtotal - descuento3;
-
-                    } else {
-                        if (tipocliente.equals("tipo4")) {
-                            costofinal = subtotal - descuento4;
-
-                            
-                        }
-
-                    }
-
-                }
-            }
-        }
-        System.out.printf("Reporte de Ventas\n"
-                + "Nombre del cliente:%s\n"
-                + "Cédula del cliente:%d\n"
-                + "Tipo de producto:%s\n"
-                + "Cantidad: %d\n"
-                + "Precio unitario: %.2f\n"
-                + "Subtotal: %.2f\n"
-                + "costofinal: %.2f\n",
-                nombrecliente,
-                cedula, nombreproducto, cantidad, precioproducto, subtotal, costofinal);
-        System.out.println(sumatotal);
+        System.out.printf("La suma final de las ventas es:%.2f", sumatotal);
     }
 }
